@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "Casco 6/28/2018 17:24",
+	"super" : "Object",
+	"category" : "Kobold-Monitor",
+	"classinstvars" : [
+		"singleton"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"teapot"
+	],
+	"name" : "Listerer",
+	"type" : "normal"
+}

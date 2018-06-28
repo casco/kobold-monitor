@@ -1,0 +1,3 @@
+initialize
+stop
+  teapot stop

@@ -1,0 +1,3 @@
+initialize
+start 
+  teapot start
