@@ -8,8 +8,9 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"teapot"
+		"teapot",
+		"reports"
 	],
-	"name" : "Listerer",
+	"name" : "Listener",
 	"type" : "normal"
 }
