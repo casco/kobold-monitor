@@ -1,13 +1,7 @@
-class ClickAttemtpMonitor {
-  //   constructor(paramOc_Ev, paramOc_Elem, paramOc_T) {
-  //     this._event = paramOc_Ev || "";
-  //     this.element = paramOc_Elem || "";
-  //     this.selectionText = "";
-  //     this.oc_T = paramOc_T || false;
-  //     this.threatName = "ClickAttempt";
-  //   }
+class ClickAttemtpMonitor extends InteractionEventMonitor  {
 
-  constructor() {
+  constructor(logger) {
+    super(logger);
     this._event = "";
     this.element = "";
     this.selectionText = "";
@@ -84,34 +78,14 @@ class ClickAttemtpMonitor {
     ) {
       var xpath = this.getElementXPath(this.element);
       var now = new Date().getTime();
-      this.logEvent(this.threatName, { xpath: xpath });
+      this.logEvent({ xpath: xpath });
       if (typeof MA_clickAttempt == "function") MA_clickAttempt(false);
     } else if (typeof MA_clickAttempt == "function") MA_clickAttempt(true);
   }
 
-  getElementXPath(elt) {
-    var path = "";
-    for (; elt && elt.nodeType == 1; elt = elt.parentNode) {
-      var idx = this.getElementIdx(elt);
-      var xname = elt.tagName;
-      if (idx > 1) xname += "[" + idx + "]";
-      path = "/" + xname + path;
+  logEvent(args) {
+    if (args.xpath != '/html/body' && args.xpath != '/html') {
+       super.logEvent('ClickAttempt', args);
     }
-    return path;
-  }
-
-  getElementIdx(elt) {
-    var count = 1;
-    for (var sib = elt.previousSibling; sib; sib = sib.previousSibling) {
-      if (sib.nodeType == 1 && sib.tagName == elt.tagName) count++;
-    }
-    return count;
-  }
-
-  logEvent(event, args) {
-    console.log(event + " on " + args.xpath);
-    // Enviar al server
   }
 }
-
-new ClickAttemtpMonitor().attach();

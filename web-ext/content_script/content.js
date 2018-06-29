@@ -1,14 +1,16 @@
 /**
  * rmcRequest is a remote method call (RMC) with the following form:
- * 
+ *
  *  { methodName: 'messageX', arguments: { arg1: 'value', arg2: 'value'}}
- * 
- *  messageX: must be one of the messages that the ContentFacade object understands. 
- *  arguments: is an object 
+ *
+ *  messageX: must be one of the messages that the ContentFacade object understands.
+ *  arguments: is an object
  */
 
-var facade = ContentFacade.getSingleton();
-browser.runtime.onMessage.addListener(rmcRequest => {return facade.handle(rmcRequest)} );
-console.log("Content loaded");
+//var facade = ContentFacade.getSingleton();
+//browser.runtime.onMessage.addListener(rmcRequest => {return facade.handle(rmcRequest)} );
 
-
+var loggerChainHead = new ConsoleInteractionLogger(
+  new XMLHttpRequestInteractionLogger("http://localhost:8888/reports/", null)
+);
+new ClickAttemtpMonitor(loggerChainHead).attach();
