@@ -1,12 +1,11 @@
 class InteractionEventMonitor {
-
   constructor(logger) {
     this.logger = logger;
   }
 
   logEvent(event, args) {
     let loc = window.top.location.href;
-    this.logger.log(loc, event, args)
+    this.logger.log(loc, event, args);
   }
 
   getElementXPath(elt) {
@@ -26,5 +25,21 @@ class InteractionEventMonitor {
       if (sib.nodeType == 1 && sib.tagName == elt.tagName) count++;
     }
     return count;
+  }
+
+  getParents(el, parentSelector /* optional */) {
+    // If no parentSelector defined will bubble up all the way to *document*
+    if (parentSelector === undefined) {
+      parentSelector = document;
+    }
+    var parents = [];
+    var p = el.parentNode;
+    while ((p !== parentSelector) && (p != null)) {
+      var o = p;
+      parents.push(o);
+      p = o.parentNode;
+    }
+    parents.push(parentSelector); // Push that parentSelector you wanted to stop at
+    return parents;
   }
 }
