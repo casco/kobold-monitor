@@ -7,6 +7,8 @@
  *  arguments: is an object 
  */
 
-browser.runtime.onMessage.addListener(rmcRequest => {return ContentFacade.getSingleton().handle(rmcRequest)} );
+var facade = ContentFacade.getSingleton();
+browser.runtime.onMessage.addListener(rmcRequest => {return facade.handle(rmcRequest)} );
+console.log("Content loaded");
 
 

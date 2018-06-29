@@ -4,42 +4,55 @@
  * I encapsulate message serialization and transmission. 
  */
 
- let contentProxySingleton = null;
+let contentProxySingleton = null;
 
- class ContentProxy {
+class ContentProxy {
 
     static getSingleton() {
         if (contentProxySingleton == null) {
             contentProxySingleton = new ContentProxy();
-        }  
+        }
         return contentProxySingleton
     }
 
-    /**
-     * Send getUrl to the ContentFacade
-     * Returns the response from the other side (if any)
-     */
-    async getUrl() {
-        return await this.send({methodName: 'getUrl', arguments: {}});
+    //notify the contentFacade that an update is needed
+    async update() {
+        return await this.send({ methodName: 'update', arguments: {} });
     }
 
     /**
-     * Send getTitle to the ContentFacade
-     * Returns a Promise that resolves to the title string
+     * Send a rmc to all tabs. Return nothing
+     * @param {the message to send} rmc 
      */
-    async getTitle() {
-        return await this.send({methodName: 'getTitle', arguments: {}});
-    }
-
-    // Private protocol down here
     async send(rmc) {
-        let activeTabs = await browser.tabs.query({active: true});
-        if (activeTabs.length > 0) {
-            var response = await browser.tabs.sendMessage(activeTabs[0].id, rmc);
-        } else { 
-            console.log ("Sending a message to the content scripts when no tab is active")
-        }   
-        return response;
+        let tabs = await browser.tabs.query({});
+        if (tabs.length > 0) {
+            for (let i = 0; i < tabs.length; ++i) {
+                try {
+                    browser.tabs.sendMessage(tabs[i].id, rmc);
+                } catch {
+                    console.log('Content scripts are not ready yet in that tab: ', error);
+                }
+            }
+        } else {
+            console.log("Sending a message to the content scripts when no tab is active")
+        }
     }
-    
+
+
+    /**
+     * The following version send messages only to the active tab (1 tab only)
+     * It will get an answer in return
+     */
+    // async send(rmc) {
+    //     let activeTabs = await browser.tabs.query({ active: true });
+    //     if (activeTabs.length > 0) {
+    //         try {
+    //             var response = await browser.tabs.sendMessage(activeTabs[0].id, rmc);
+    //         } catch (error) { console.log('Content scripts are not ready yet: ', error) }
+    //     } else {
+    //         console.log("Sending a message to the content scripts when no tab is active")
+    //     }
+    //     return response;
+    // }
 }

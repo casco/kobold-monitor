@@ -1,30 +1,16 @@
 {
-  "name": "kobold-monitor",
+  "name": "task-tracker-webext",
   "version": "1.0.0",
-  "description": "Kobold monitors user actions while browsing and reports them as high leven interaction events",
+  "description": "Web-extension client for the remote usability tests tool",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/casco/kobold-monitor.git"
-  },
-  "keywords": [
-    "usability",
-    "jquery",
-    "browser",
-    "events",
-    "monitor"
-  ],
-  "author": "LIFIA",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/casco/kobold-monitor/issues"
-  },
-  "homepage": "https://github.com/casco/kobold-monitor#readme",
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "htmlclean": "^3.0.8",
-    "jquery": "^3.3.1"
+    "axios": "^0.18.0",
+    "jquery": "^3.3.1",
+    "webextension-polyfill": "^0.2.1"
   }
 }

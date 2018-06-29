@@ -12,16 +12,42 @@ class ContentFacade extends Facade {
     static getSingleton() {
         if (contentFacadeSingleton == null) {
             contentFacadeSingleton = new ContentFacade();
-        }  
+        }
         return contentFacadeSingleton
     }
 
-    getTitle(args) {
-       return document.title; 
+    //The session changed in the background / update
+    async update() {
+        let spec = await BackgroundProxy.getSingleton().getActiveComponentSpec();
+        this.activateComponentSpec(spec);
     }
 
-    getUrl(args) {
-        return document.URL;
+
+    // Private methods from here down
+
+    activateComponentSpec(componentSpecification) {
+        if (this.activeComponent) {
+            this.activeComponent.deactivate();
+        }
+        if (componentSpecification == null) {
+            this.activeComponent = null;
+        } else {
+            this.activeComponent = new (this.componentClasses()[componentSpecification.componentClassname])(componentSpecification);
+            this.activeComponent.activate();
+        }
     }
-   
+
+    //Ugly trick until I learn how to do this with reflection.
+    componentClasses() {
+        return {
+            NullComponent: NullComponent,
+            BasicDemographicsComponent: BasicDemographicsComponent,
+            TaskInstructionsComponent: TaskInstructionsComponent,
+            SUSComponent: SUSComponent,
+            MessageComponent: MessageComponent
+        }
+    }
+
+
+
 }
