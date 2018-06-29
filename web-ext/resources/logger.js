@@ -1186,3 +1186,5 @@ function ZoomOnElement(zoomAmount){
         return this.css();
     }
 })(jQuery);
+
+console.log("logger.js loaded")
