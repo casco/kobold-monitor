@@ -82,15 +82,34 @@ class ClickAttemtpMonitor {
             .first()[0]
             .getAttribute("href") == "#"))
     ) {
-      var xpath = xpathInstance.getElementXPath(this.element);
+      var xpath = this.getElementXPath(this.element);
       var now = new Date().getTime();
       this.logEvent(this.threatName, { xpath: xpath });
       if (typeof MA_clickAttempt == "function") MA_clickAttempt(false);
     } else if (typeof MA_clickAttempt == "function") MA_clickAttempt(true);
   }
 
-  logEvent(event) {
-    console.log(this.threatName + " on " + xpath);
+  getElementXPath(elt) {
+    var path = "";
+    for (; elt && elt.nodeType == 1; elt = elt.parentNode) {
+      var idx = this.getElementIdx(elt);
+      var xname = elt.tagName;
+      if (idx > 1) xname += "[" + idx + "]";
+      path = "/" + xname + path;
+    }
+    return path;
+  }
+
+  getElementIdx(elt) {
+    var count = 1;
+    for (var sib = elt.previousSibling; sib; sib = sib.previousSibling) {
+      if (sib.nodeType == 1 && sib.tagName == elt.tagName) count++;
+    }
+    return count;
+  }
+
+  logEvent(event, args) {
+    console.log(event + " on " + args.xpath);
     // Enviar al server
   }
 }
