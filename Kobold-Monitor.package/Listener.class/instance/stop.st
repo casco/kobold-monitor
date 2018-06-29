@@ -1,3 +1,0 @@
-initialize
-stop
-  teapot stop

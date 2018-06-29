@@ -1,3 +1,0 @@
-initialize
-start 
-  teapot start
