@@ -1,4 +1,4 @@
-class InteractionEventMonitor {
+class AbstractInteractionMonitor {
   constructor(logger) {
     this.logger = logger;
   }

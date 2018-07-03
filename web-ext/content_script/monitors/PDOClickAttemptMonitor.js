@@ -1,4 +1,4 @@
-class PDOClickAttemtpMonitor extends InteractionEventMonitor {
+class PDOClickAttemtpMonitor extends AbstractInteractionMonitor {
     constructor(logger) {
       super(logger);
       this._event = "";

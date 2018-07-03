@@ -1,7 +1,8 @@
-class XMLHttpRequestInteractionLogger {
+class XMLHttpRequestInteractionLogger extends AbstractInteractionLogger{
+  
   constructor(endpoint, nextLogger) {
     this.endpoint = endpoint;
-    this.nextLogger = nextLogger;
+    super(nextLogger);
   }
 
   /**
@@ -28,8 +29,6 @@ class XMLHttpRequestInteractionLogger {
     };
     xhr.send(JSON.stringify(postData));
 
-    if (this.nextLogger) {
-      this.nextLogger.log(href, interactionDescriptor, data);
-    }
+    super.log(href, interactionDescriptor, data);
   }
 }

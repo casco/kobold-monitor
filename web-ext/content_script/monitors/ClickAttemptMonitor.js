@@ -1,4 +1,4 @@
-class ClickAttemtpMonitor extends InteractionEventMonitor  {
+class ClickAttemtpMonitor extends AbstractInteractionMonitor  {
 
   constructor(logger) {
     super(logger);

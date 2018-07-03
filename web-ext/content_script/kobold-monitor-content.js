@@ -9,8 +9,6 @@
 
 //var facade = ContentFacade.getSingleton();
 //browser.runtime.onMessage.addListener(rmcRequest => {return facade.handle(rmcRequest)} );
-
-var loggerChainHead = new ConsoleInteractionLogger(
-  new XMLHttpRequestInteractionLogger("http://localhost:8888/reports/", null)
-);
-new ClickAttemtpMonitor(loggerChainHead).attach();
+console.log("Loading Kobold monitor");
+var loggerChainHead = new ConsoleInteractionLogger(new WebExperimentsNotebookInteractionLogger());
+new UrlsVisitedMonitor(loggerChainHead).attach();
