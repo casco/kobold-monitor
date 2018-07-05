@@ -1,14 +1,41 @@
-/**
- * rmcRequest is a remote method call (RMC) with the following form:
- *
- *  { methodName: 'messageX', arguments: { arg1: 'value', arg2: 'value'}}
- *
- *  messageX: must be one of the messages that the ContentFacade object understands.
- *  arguments: is an object
- */
-
-//var facade = ContentFacade.getSingleton();
-//browser.runtime.onMessage.addListener(rmcRequest => {return facade.handle(rmcRequest)} );
-console.log("Loading Kobold monitor");
-var loggerChainHead = new ConsoleInteractionLogger(new WebExperimentsNotebookInteractionLogger());
+// The head is a logger that silently passes everything to the next one
+var loggerChainHead = new InteractionLogger();
 new UrlsVisitedMonitor(loggerChainHead).attach();
+
+browser.storage.local.get("config").then(data => {
+    var config = data.config;
+    updateMonitorsAndLoggers(config);
+});
+
+browser.storage.onChanged.addListener((change, area) => {
+    if (area == "local" && change.config.newValue) {
+        updateMonitorsAndLoggers(change.config.newValue);
+    }
+});
+
+var updateMonitorsAndLoggers = function(config) {
+    loggerChainHead.setNextLogger(null);
+    if (config.logToConsole) {
+        loggerChainHead.setNextLogger(new ConsoleInteractionLogger());
+    }
+    if (config.wenExtensionId) {
+        let newSecond = new WebExperimentsNotebookInteractionLogger(config.wenExtensionId);
+        newSecond.setNextLogger(loggerChainHead.getNextLogger());
+        loggerChainHead.setNextLogger(newSecond);
+    }
+    if (config.httpPostServer) {
+        let newSecond = new XMLHttpRequestInteractionLogger(config.httpPostServer);
+        newSecond.setNextLogger(loggerChainHead.getNextLogger());
+        loggerChainHead.setNextLogger(newSecond);
+    }
+    if (config.UrlsVisitedMonitor) {
+        enableMonitor(UrlsVisitedMonitor);
+    };
+    if (config.ClickAttemtpMonitor) {
+        enableMonitor(ClickAttemtpMonitor);
+    }
+}
+
+var enableMonitor = function(monitorClass) {
+    new monitorClass(loggerChainHead).attach();
+}

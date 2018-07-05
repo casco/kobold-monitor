@@ -1,7 +1,4 @@
-class ConsoleInteractionLogger extends AbstractInteractionLogger {
-    constructor(nextLogger) {
-        super(nextLogger);
-    }
+class ConsoleInteractionLogger extends InteractionLogger {
 
     /**
      * Logs the interaction to the console

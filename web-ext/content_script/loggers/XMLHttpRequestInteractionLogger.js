@@ -1,8 +1,8 @@
-class XMLHttpRequestInteractionLogger extends AbstractInteractionLogger{
+class XMLHttpRequestInteractionLogger extends InteractionLogger{
   
-  constructor(endpoint, nextLogger) {
+  constructor(endpoint) {
+    super();
     this.endpoint = endpoint;
-    super(nextLogger);
   }
 
   /**

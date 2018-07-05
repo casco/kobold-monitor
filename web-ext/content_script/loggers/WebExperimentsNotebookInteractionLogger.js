@@ -1,6 +1,8 @@
-class WebExperimentsNotebookInteractionLogger extends AbstractInteractionLogger {
-    constructor(nextLogger) {
-        super(nextLogger);
+class WebExperimentsNotebookInteractionLogger extends InteractionLogger {
+
+    constructor(webExtId) {
+        super();
+        this.webExtentionId = webExtId;
     }
 
     /**
@@ -11,7 +13,7 @@ class WebExperimentsNotebookInteractionLogger extends AbstractInteractionLogger 
      */
     log(href, interactionDescriptor, data) {
         browser.runtime
-            .sendMessage("RemoteUsabilityTests@lifia.info.unlp.edu.ar", {
+            .sendMessage(this.webExtentionId, {
                 methodName: "logExternalKoboldEvent",
                 arguments: {
                     event: {

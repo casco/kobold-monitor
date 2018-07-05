@@ -5,8 +5,13 @@
   "version": "1.0",
   "homepage_url": "https://github.com/juliangrigera/RemoteUsabilityTests",
   "permissions": [
-    "<all_urls>"
+    "<all_urls>",
+    "storage"
   ],
+  "options_ui": {
+    "page": "config/options.html",
+    "browser_style": true
+  },
   "content_scripts": [
     {
       "matches": [
@@ -18,7 +23,7 @@
         "content_script/monitors/AbstractInteractionMonitor.js",
         "content_script/monitors/ClickAttemptMonitor.js",
         "content_script/monitors/UrlsVisitedMonitor.js",
-        "content_script/loggers/AbstractInteractionLogger.js",
+        "content_script/loggers/InteractionLogger.js",
         "content_script/loggers/ConsoleInteractionLogger.js",
         "content_script/loggers/XMLHttpRequestInteractionLogger.js",
         "content_script/loggers/WebExperimentsNotebookInteractionLogger.js",

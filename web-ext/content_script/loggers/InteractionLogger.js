@@ -1,7 +1,5 @@
-class AbstractInteractionLogger {
-    constructor(nextLogger) {
-        this.nextLogger = nextLogger;
-    }
+class InteractionLogger {
+
     /**
      * Logs the interaction to the console
      * @param {*} href The href where the interaction was obseved
@@ -12,5 +10,13 @@ class AbstractInteractionLogger {
         if (this.nextLogger) {
             this.nextLogger.log(href, interactionDescriptor, data);
         }
+    }
+
+    setNextLogger(logger) {
+        this.nextLogger = logger;
+    }
+
+    getNextLogger() {
+        return this.nextLogger
     }
 }
