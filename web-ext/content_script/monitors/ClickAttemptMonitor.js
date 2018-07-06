@@ -58,8 +58,7 @@ class ClickAttemtpMonitor extends AbstractInteractionMonitor {
 
     timeout_trigger() {
         let notALargeContainer =
-            $(this.element).outerWidth() < 1500 &&
-            $(this.element).outerHeight() < 600;
+            this.element.offsetWidth < 1500 && this.element.offsetHeight < 600;
         if (
             this.oc_T &&
             notALargeContainer &&
