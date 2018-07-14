@@ -24,6 +24,7 @@
                 "content_script/monitors/Monitor.js",
                 "content_script/monitors/ClickAttemptMonitor.js",
                 "content_script/monitors/UrlsVisitedMonitor.js",
+                "content_script/monitors/FormSubmissionMonitor.js",
                 "content_script/loggers/InteractionLogger.js",
                 "content_script/loggers/ConsoleInteractionLogger.js",
                 "content_script/loggers/XMLHttpRequestInteractionLogger.js",

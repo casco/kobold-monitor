@@ -11,9 +11,7 @@ var initializeKoboldConfiguration = function() {
 };
 
 browser.storage.local.get("config").then(data => {
-    console.log("data is:", data);
     if (! data.hasOwnProperty("config")) {
-        console.log("Initializing");
         initializeKoboldConfiguration();
     }
 });
