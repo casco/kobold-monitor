@@ -33,7 +33,11 @@ var updateMonitorsAndLoggers = function(config) {
     };
     if (config.ClickAttemtpMonitor) {
         enableMonitor(ClickAttemtpMonitor);
+    };
+    if (config.FormSubmissionMonitor) {
+        enableMonitor(FormSubmissionMonitor);
     }
+    
 }
 
 var enableMonitor = function(monitorClass) {

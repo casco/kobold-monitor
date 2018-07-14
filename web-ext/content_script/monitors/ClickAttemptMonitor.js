@@ -1,4 +1,4 @@
-class ClickAttemtpMonitor extends AbstractInteractionMonitor {
+class ClickAttemtpMonitor extends Monitor {
     constructor(logger) {
         super(logger);
         this._event = "";
@@ -81,7 +81,6 @@ class ClickAttemtpMonitor extends AbstractInteractionMonitor {
                         .getAttribute("href") == "#"))
         ) {
             var xpath = this.getElementXPath(this.element);
-            var now = new Date().getTime();
             this.logEvent({ xpath: xpath });
             if (typeof MA_clickAttempt == "function") MA_clickAttempt(false);
         } else if (typeof MA_clickAttempt == "function") MA_clickAttempt(true);

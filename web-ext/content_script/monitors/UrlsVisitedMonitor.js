@@ -1,4 +1,4 @@
-class UrlsVisitedMonitor extends AbstractInteractionMonitor {
+class UrlsVisitedMonitor extends Monitor {
     constructor(logger) {
         super(logger);
     }
