@@ -9,6 +9,14 @@ class Monitor {
         this.logger.log(loc, event, args);
     }
 
+    /**
+     * My subclasses should implement this method attaching themselves to 
+     * the required DOM events
+     */
+    attach() {
+
+    }
+
     getElementXPath(elt) {
         var path = "";
         for (; elt && elt.nodeType == 1; elt = elt.parentNode) {
@@ -20,13 +28,6 @@ class Monitor {
         return path;
     }
 
-    getElementIdx(elt) {
-        var count = 1;
-        for (var sib = elt.previousSibling; sib; sib = sib.previousSibling) {
-            if (sib.nodeType == 1 && sib.tagName == elt.tagName) count++;
-        }
-        return count;
-    }
 
     getParents(el, parentSelector /* optional */) {
         // If no parentSelector defined will bubble up all the way to *document*
@@ -58,6 +59,15 @@ class Monitor {
             .find("script")
             .remove();
         return ($(elementCopy)[0].outerHTML);
+    }
+
+   // PRIVATE MEHTODS
+    getElementIdx(elt) {
+        var count = 1;
+        for (var sib = elt.previousSibling; sib; sib = sib.previousSibling) {
+            if (sib.nodeType == 1 && sib.tagName == elt.tagName) count++;
+        }
+        return count;
     }
 }
 
