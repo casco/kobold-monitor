@@ -5,7 +5,7 @@
     "version": "1.0",
     "homepage_url": "https://github.com/juliangrigera/RemoteUsabilityTests",
     "icons": {
-        "48": "resources/kobold.png"
+        "48": "resources/kobold-48.png"
     },
     "permissions": ["<all_urls>", "storage"],
     "options_ui": {
@@ -28,6 +28,7 @@
         "node_modules/jquery/dist/jquery.min.js",
         "resources/jquert.htmlClean.min.js",
         "resources/kobold.png",
+        "config/options.css",
         "config/options.js"
     ]
 }
