@@ -1,15 +1,15 @@
-var meta = document.createElement("meta");
-meta.name = "SelfRefactoringToken";
-meta.content = "07ece081-172c-0d00-807c-3f3c018edd61";
-document.getElementsByTagName("head")[0].appendChild(meta);
+var updateConfiguration = function(config) {
+    window.SelfRefactoringToken = config.koboldToken;
+    window.SelfRefactoringServerUrl = config.koboldServer;
+};
 
-/**
-meta = document.createElement("meta");
-meta.name = "SelfRefactoringServerUrl";
-meta.content = "http://autorefactoring.lifia.info.unlp.edu.ar";
-document.getElementsByTagName("head")[0].appendChild(meta);
- * 
- */
+browser.storage.local.get("config").then(data => {
+    var config = data.config;
+    updateConfiguration(config);
+});
 
- 
-console.log("instrument.js loaded");
+browser.storage.onChanged.addListener((change, area) => {
+    if (area == "local" && change.config.newValue) {
+        updateConfiguration(change.config.newValue);
+    }
+});

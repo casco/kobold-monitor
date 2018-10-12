@@ -4,7 +4,10 @@
     "name": "Kobold tasklogger script",
     "version": "1.0",
     "homepage_url": "https://github.com/juliangrigera/RemoteUsabilityTests",
-    "permissions": ["<all_urls>"],
+    "icons": {
+        "48": "resources/kobold.png"
+    },
+    "permissions": ["<all_urls>", "storage"],
     "options_ui": {
         "page": "config/options.html",
         "open_in_tab": true
@@ -16,13 +19,15 @@
                 "node_modules/webextension-polyfill/dist/browser-polyfill.min.js",
                 "node_modules/jquery/dist/jquery.min.js",
                 "resources/jquert.htmlClean.min.js",
-                "content_script/logger.js",
-                "content_script/instrument.js"
+                "content_script/logger.js"
             ]
         }
     ],
     "web_accessible_resources": [
         "node_modules/webextension-polyfill/dist/browser-polyfill.min.js",
+        "node_modules/jquery/dist/jquery.min.js",
+        "resources/jquert.htmlClean.min.js",
+        "resources/kobold.png",
         "config/options.js"
     ]
 }
